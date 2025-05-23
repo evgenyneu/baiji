@@ -27,8 +27,10 @@ kokoro_pipe = KPipeline(lang_code='a')
 end_load = time.time()
 print(f"Kokoro-82M loaded in {end_load - start_load:.2f} seconds")
 
-# Generate speech
-text = "Hello, this is Kokoro TTS. I provide fast, high-quality speech generation with only 82 million parameters. And I also sound great haha :D"
+# Generate speech - audiobook test with longer text
+text = """In the quiet village of Willowbrook, nestled between rolling hills and ancient oak trees, lived a young librarian named Clara who possessed an extraordinary gift. Every evening, as the sun painted the sky in shades of amber and rose, she would discover that the books in her care began to whisper their stories aloud. The leather-bound volumes would creak open by themselves, and the characters within would step out from their pages, bringing tales of adventure, romance, and mystery to life in the dimly lit library halls.
+
+Clara had inherited this magical library from her grandmother, who had warned her that with great knowledge comes great responsibility. The stories that escaped the books each night weren't merely entertainment—they were living memories of human experience, hopes and dreams that had been carefully preserved in ink and paper for generations. As Clara learned to navigate this enchanted world, she realized that she had become the guardian not just of books, but of the very essence of storytelling itself, ensuring that these precious narratives would continue to inspire and guide future generations through the darkness of uncertainty."""
 
 print("Generating audio...")
 start_time = time.time()
