@@ -28,7 +28,7 @@ end_load = time.time()
 print(f"Kokoro-82M loaded in {end_load - start_load:.2f} seconds")
 
 # Generate speech
-text = "Hello, this is Kokoro TTS. I provide fast, high-quality speech generation with only 82 million parameters."
+text = "Hello, this is Kokoro TTS. I provide fast, high-quality speech generation with only 82 million parameters. And I also sound great haha :D"
 
 print("Generating audio...")
 start_time = time.time()
