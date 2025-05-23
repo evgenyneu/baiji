@@ -1,12 +1,11 @@
 [project]
 name = "txt-to-speech"
 version = "0.1.0"
-description = "Text-to-speech experiments with Muyan-TTS"
+description = "Text-to-speech experiments with Bark and VITS"
 requires-python = ">=3.13"
 dependencies = [
     "torch",
     "transformers",
-    "librosa",
     "soundfile",
     "numpy",
     "ipython",
@@ -14,9 +13,6 @@ dependencies = [
     "notebook",
     "ipykernel",
     "pydub",
-    "sentencepiece",
-    "datasets",
-    "parler-tts",
 ]
 
 [build-system]
@@ -26,8 +22,3 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 include = ["*.md"]
 
-[tool.hatch.metadata]
-allow-direct-references = true
-
-[tool.uv.sources]
-parler-tts = { git = "https://github.com/huggingface/parler-tts.git" }
