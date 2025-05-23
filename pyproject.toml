@@ -13,6 +13,7 @@ dependencies = [
     "notebook",
     "ipykernel",
     "pydub",
+    "audioop-lts"
 ]
 
 [build-system]
@@ -21,4 +22,3 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 include = ["*.md"]
-
