@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
 Kokoro-82M TTS - Fast High-Quality Text-to-Speech
+
+Prerequisites:
+- Install espeak-ng: brew install espeak-ng
+- Run with: PYTORCH_ENABLE_MPS_FALLBACK=1 uv run python kokoro_tts.py
 """
 
 import time
