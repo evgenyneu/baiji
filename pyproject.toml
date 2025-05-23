@@ -2,7 +2,7 @@
 name = "txt-to-speech"
 version = "0.1.0"
 description = "Text-to-speech experiments with Bark and VITS"
-requires-python = ">=3.13"
+requires-python = ">=3.10,<3.13"
 dependencies = [
     "torch",
     "transformers",
@@ -13,7 +13,8 @@ dependencies = [
     "notebook",
     "ipykernel",
     "pydub",
-    "audioop-lts"
+    "kokoro>=0.9.4",
+    "pip>=25.1.1",
 ]
 
 [build-system]
