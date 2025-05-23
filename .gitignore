@@ -1,0 +1,30 @@
+# Output files
+output/
+
+# Audio files
+*.wav
+*.mp3
+*.flac
+*.ogg
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
