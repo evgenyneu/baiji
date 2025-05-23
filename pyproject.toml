@@ -1,0 +1,25 @@
+[project]
+name = "txt-to-speech"
+version = "0.1.0"
+description = "Text-to-speech experiments with Muyan-TTS"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "torch",
+    "transformers",
+    "librosa",
+    "soundfile",
+    "numpy",
+    "ipython",
+    "jupyter",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = [
+    "notebook",
+    "ipykernel",
+]
