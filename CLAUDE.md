@@ -45,13 +45,27 @@ Each TTS model has its own notebook, and the notebook is used to evaluate the mo
 - Much faster (~10 seconds) with good quality
 - Outputs to `output/vits_output.mp3`
 
+**Kokoro TTS (`kokoro_tts.py`)**:
+- By FAR the best quality, and the fastest.
+- We will use this model from now on.
+- Needs to be run with `PYTORCH_ENABLE_MPS_FALLBACK=1` environment variable:
+
+```sh
+PYTORCH_ENABLE_MPS_FALLBACK=1 uv run python kokoro_tts.py
+```
+
+
+
 
 ### Output Structure
+
 All generated audio files are saved in the `output/` directory as both WAV and MP3 formats. Audio is normalized to prevent clipping before saving.
 
 ## Apple Silicon Considerations
+
 - Bark TTS requires CPU execution due to MPS dtype compatibility issues
 - VITS TTS leverages MPS GPU acceleration effectively
+-- Kokoro uses MPS very well.
 - Set `PYTORCH_ENABLE_MPS_FALLBACK=1` environment variable for better compatibility
 
 ## Code style guidelines

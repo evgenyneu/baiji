@@ -36,9 +36,15 @@ print("Generating audio...")
 start_time = time.time()
 generator = kokoro_pipe(text, voice='af_heart')
 
-# Get the audio from the generator
-for i, (graphemes, phonemes, audio_data) in enumerate(generator):
-    break  # We just want the first result
+# Get all audio chunks from the generator
+audio_chunks = []
+for i, (graphemes, phonemes, audio_chunk) in enumerate(generator):
+    audio_chunks.append(audio_chunk)
+    print(f"Processed chunk {i+1}: {len(audio_chunk)} samples")
+
+# Concatenate all audio chunks
+import torch
+audio_data = torch.cat(audio_chunks, dim=0)
 
 end_time = time.time()
 
