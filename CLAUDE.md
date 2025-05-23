@@ -23,9 +23,12 @@ uv run jupyter nbconvert --execute bark_tts.ipynb
 uv run jupyter nbconvert --execute vits_tts.ipynb
 ```
 
-## Project Architecture
+## Project Purpose
 
-This is a text-to-speech experimentation project comparing different TTS models using Jupyter notebooks. The project uses `uv` for Python package management and requires Python 3.13+.
+The purpose is to evaluate TTS models, with intent of using them to generate audiobook from a ebook text. Thus the models needs to be able to be fast but still have good quality. The balance of speed and quality is important.
+
+Each TTS model has its own notebook, and the notebook is used to evaluate the model.
+
 
 ### TTS Model Implementations
 
