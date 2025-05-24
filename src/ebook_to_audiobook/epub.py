@@ -10,6 +10,7 @@ def epub_to_chapters(path: str) -> List[str]:
     Returns a list of strings, each string is a chapter's text.
     Removes <header>, <footer>, <nav>, and <sup> tags from each chapter.
     Paragraphs are separated by blank lines.
+    Skips chapters that are empty or only whitespace.
     """
     book = epub.read_epub(path)
     chapters = []
@@ -29,7 +30,8 @@ def epub_to_chapters(path: str) -> List[str]:
             else:
                 text = soup.get_text(separator='\n', strip=True)
 
-            if text:
+            # Skip chapters that are empty or only whitespace
+            if text and text.strip():
                 chapters.append(text)
 
     return chapters
