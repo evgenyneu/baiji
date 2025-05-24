@@ -6,17 +6,17 @@ Prerequisites:
 - Install espeak-ng: brew install espeak-ng
 - Run with: PYTORCH_ENABLE_MPS_FALLBACK=1 uv run python kokoro_tts.py
 """
+import os
+os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
 
 import time
 import torch
-import os
 import soundfile as sf
 from pydub import AudioSegment
 import numpy as np
 from kokoro import KPipeline
 
 # Set environment variable for Apple Silicon compatibility
-os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
 
 print(f"MPS available: {torch.backends.mps.is_available()}")
 
