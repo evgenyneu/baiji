@@ -4,24 +4,40 @@ from kokoro import KPipeline
 import torch
 import soundfile as sf
 import time
-from .progress import save_progress
+from .progress import save_progress, read_progress
 
 def convert(chapters: List[str]) -> None:
     kokoro_pipe = KPipeline(lang_code='a')
 
+    # Read progress if exists
+    progress = read_progress()
+    resume_chapter_idx, resume_segment_idx = progress
+
+    if resume_chapter_idx is not None:
+        print(f"== Resuming from chapter {resume_chapter_idx} segment {resume_segment_idx + 1}")
+
     for chapter_idx, chapter in enumerate(chapters, 1):
-        convert_single_chapter(chapter, chapter_idx, kokoro_pipe)
+        # If resuming, skip chapters before the saved one
+        if resume_chapter_idx is not None and chapter_idx < resume_chapter_idx:
+            continue
+
+        convert_single_chapter(chapter, chapter_idx, kokoro_pipe, resume_segment_idx)
+
         return
 
-def convert_single_chapter(text: str, chapter_idx: int, kokoro_pipe: KPipeline) -> None:
+def convert_single_chapter(text: str, chapter_idx: int, kokoro_pipe: KPipeline, start_segment_idx) -> None:
     """
     Convert a single chapter to audio chunks using Kokoro TTS and save each chunk as a .wav file.
     Splits the chapter into segments by single newlines and processes each segment independently.
+    start_segment_idx: segment index to start from (1-based)
     """
     os.makedirs('output/chunks', exist_ok=True)
     segments = split_into_segments(text)
 
     for segment_idx, segment in enumerate(segments, 1):
+        if start_segment_idx is not None and segment_idx <= start_segment_idx:
+            continue
+
         convert_segment(segment, chapter_idx, segment_idx, kokoro_pipe)
         save_progress(chapter_idx, segment_idx)
 
