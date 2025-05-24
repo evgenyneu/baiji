@@ -1,0 +1,47 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+## This are important features of the program
+
+- The program is made to convert large ebook text  (.txt or .epub) to audiobook (mp3).
+- Since it can take a lot of time to do TTS, the user should be able to cancel (Ctrl-C) but when they start again it should continue where it stopped and not do it again from the start.
+- For .epub file, it should create multiple mp3 files, one for each chapter, instead of single large mp3.
+
+
+## Development plan
+
+Here's the concise updated plan:
+
+1. **Directory Structure:**
+   - Root: `output/`
+     - `checkpoint.json`: Tracks chapter and chunk indices.
+     - `chunks/`: Stores individual `.wav` chunks (e.g., `chunk_0001.wav`).
+     - `chapters/`: Stores combined `.mp3` files (e.g., `chapter_0001.mp3`).
+
+2. **Process Flow:**
+   - **Input Handling:**
+     - Parse command-line arguments for input file path.
+     - Detect if input is `.txt` or `.epub`.
+
+   - **Text Extraction:**
+     - For `.txt`, read the file directly.
+     - For `.epub`, extract text chapter by chapter.
+
+   - **TTS Processing:**
+     - Generate audio chunks using Kokoro TTS.
+     - Save each chunk as a `.wav` file in `output/chunks/`.
+     - Track progress in `checkpoint.json`.
+
+   - **Combining and Converting:**
+     - Once all chunks for a chapter are generated, combine them into a single `.wav` file.
+     - Convert the combined `.wav` to `.mp3` and save in `output/chapters/`.
+     - Delete the processed `.wav` chunks.
+
+   - **Cancellation and Resumption:**
+     - Allow the user to cancel the process.
+     - On cancellation, save the current chapter and chunk indices to `checkpoint.json`.
+     - On restart, read `checkpoint.json` and resume from the last processed point.
+
+This plan ensures efficient memory usage, allows for cancellation and resumption, and keeps your project organized.
