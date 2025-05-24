@@ -2875,6 +2875,7 @@ dependencies = [
     { name = "pydub" },
     { name = "soundfile" },
     { name = "torch" },
+    { name = "tqdm" },
     { name = "transformers" },
 ]
 
@@ -2892,6 +2893,7 @@ requires-dist = [
     { name = "pydub" },
     { name = "soundfile" },
     { name = "torch" },
+    { name = "tqdm" },
     { name = "transformers" },
 ]
 
