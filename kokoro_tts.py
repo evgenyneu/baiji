@@ -28,9 +28,23 @@ end_load = time.time()
 print(f"Kokoro-82M loaded in {end_load - start_load:.2f} seconds")
 
 # Generate speech - audiobook test with longer text
-text = """In the quiet village of Willowbrook, nestled between rolling hills and ancient oak trees, lived a young librarian named Clara who possessed an extraordinary gift. Every evening, as the sun painted the sky in shades of amber and rose, she would discover that the books in her care began to whisper their stories aloud. The leather-bound volumes would creak open by themselves, and the characters within would step out from their pages, bringing tales of adventure, romance, and mystery to life in the dimly lit library halls.
+text = """
 
-Clara had inherited this magical library from her grandmother, who had warned her that with great knowledge comes great responsibility. The stories that escaped the books each night weren't merely entertainment—they were living memories of human experience, hopes and dreams that had been carefully preserved in ink and paper for generations. As Clara learned to navigate this enchanted world, she realized that she had become the guardian not just of books, but of the very essence of storytelling itself, ensuring that these precious narratives would continue to inspire and guide future generations through the darkness of uncertainty."""
+Chapter 1
+
+All Animals Are Equal . . .
+
+or why the ethical principle on which human equality rests requires us to extend equal consideration to animals too
+
+The Basis of Equality
+
+“Animal Liberation” may sound more like a spoof of other liberation movements than a serious objective. In fact, the idea of “The Rights of Animals” was once used to parody the case for women’s rights. When Mary Wollstonecraft, a forerunner of modern feminists, published herVindication of the Rights of Womanin 1792, her views were widely regarded as absurd, and before long an anonymous publication appeared titledA Vindication of the Rights of Brutes. The author of this satirical work (now known to have been Thomas Taylor, a distinguished Cambridge philosopher) tried to refute Mary Wollstonecraft’s arguments by showing that they could be carried one step further. If the argument for equality was sound when applied to women, why should it not be applied to dogs, cats, and horses? Yet to hold that these “brutes” had rights was manifestly absurd. Therefore the reasoning for the equality of women must also be unsound.
+
+Let us assume that we wish to defend the case for women’s rights against Taylor’s attack. How should we reply? One way would be by saying that the case for equality between men and women cannot validly be extended to nonhuman animals. Women have a right to vote, for instance, because they are just as capable of making rational decisions about the future as men are; dogs, on the other hand, are incapable of understanding the significance of voting, so they should not have the right to vote. There are many other capacities that men and women share, while humans and animals do not. So, it might be said, men and women are equal and should have equal rights, while humans and nonhumans are different and should not have equal rights.
+
+This reasoning is correct as far as the case for equality between men and women is concerned. The important differences between humans and other animals must give rise to some differences in the rights that each have. But there are also important differences between adults and children. Since neither dogs nor young children can vote, neither has the right to vote. Recognizing this, however, does not count against extending a more basic principle of equality to children, or to nonhuman animals. That extension does not imply that we must treat everyone in exactly the same way, regardless of age or mental capacity. The basic principle of equality does not require equal or identical treatment; it requires equal consideration. Equal consideration for different beings may lead to different treatment and different rights.
+
+"""
 
 print("Generating audio...")
 start_time = time.time()
