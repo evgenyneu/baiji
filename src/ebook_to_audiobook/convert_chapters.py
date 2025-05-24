@@ -23,8 +23,6 @@ def convert(chapters: List[str]) -> None:
 
         convert_single_chapter(chapter, chapter_idx, kokoro_pipe, resume_segment_idx)
 
-        return
-
 def convert_single_chapter(text: str, chapter_idx: int, kokoro_pipe: KPipeline, start_segment_idx) -> None:
     """
     Convert a single chapter to audio chunks using Kokoro TTS and save each chunk as a .wav file.
