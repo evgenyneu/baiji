@@ -4,6 +4,7 @@ from kokoro import KPipeline
 import torch
 import soundfile as sf
 import time
+from .progress import save_progress
 
 def convert(chapters: List[str]) -> None:
     kokoro_pipe = KPipeline(lang_code='a')
@@ -20,17 +21,18 @@ def convert_single_chapter(text: str, chapter_idx: int, kokoro_pipe: KPipeline) 
     os.makedirs('output/chunks', exist_ok=True)
     segments = split_into_segments(text)
 
-    for segment_num, segment in enumerate(segments, 1):
-        convert_segment(segment, chapter_idx, segment_num, kokoro_pipe)
+    for segment_idx, segment in enumerate(segments, 1):
+        convert_segment(segment, chapter_idx, segment_idx, kokoro_pipe)
+        save_progress(chapter_idx, segment_idx)
 
-def convert_segment(segment: str, chapter_idx: int, segment_num: int, kokoro_pipe: KPipeline) -> None:
+def convert_segment(segment: str, chapter_idx: int, segment_idx: int, kokoro_pipe: KPipeline) -> None:
     """
     Convert a text segment to audio using Kokoro TTS and save as a .wav file.
     """
     generator = kokoro_pipe(segment, voice='af_heart')
 
     for chunk_idx, (graphemes, phonemes, audio_chunk) in enumerate(generator, 1):
-        chunk_path = f'output/chunks/chunk_{chapter_idx:04d}_{segment_num:04d}_{chunk_idx:04d}.wav'
+        chunk_path = f'output/chunks/chunk_{chapter_idx:04d}_{segment_idx:04d}_{chunk_idx:04d}.wav'
         audio_array = audio_chunk.cpu().numpy() if torch.is_tensor(audio_chunk) else audio_chunk
         sf.write(chunk_path, audio_array, 24000)
 
