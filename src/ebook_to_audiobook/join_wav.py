@@ -21,7 +21,7 @@ def join_wav(chapter_idx: int) -> None:
         combined += audio
 
     mp3_path = f'output/chapters/chapter_{chapter_idx:04d}.mp3'
-    combined.export(mp3_path, format='mp3')
+    combined.export(mp3_path, format='mp3', bitrate='64k')
 
     # Remove wav files
     for chunk_file in chunk_files:
