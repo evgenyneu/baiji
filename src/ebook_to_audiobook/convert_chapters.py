@@ -3,19 +3,20 @@ import os
 from kokoro import KPipeline
 import torch
 import soundfile as sf
-
+import time
 
 def convert(chapters: List[str]) -> None:
+    kokoro_pipe = KPipeline(lang_code='a')
+
     for idx, chapter in enumerate(chapters, 1):
-        convert_single_chapter(chapter, idx)
+        convert_single_chapter(chapter, idx, kokoro_pipe)
         return
 
-def convert_single_chapter(text: str, idx: int) -> None:
+def convert_single_chapter(text: str, idx: int, kokoro_pipe: KPipeline) -> None:
     """
     Convert a single chapter to audio chunks using Kokoro TTS and save each chunk as a .wav file.
     """
     os.makedirs('output/chunks', exist_ok=True)
-    kokoro_pipe = KPipeline(lang_code='a')
     generator = kokoro_pipe(text, voice='af_heart')
 
     for chunk_num, (graphemes, phonemes, audio_chunk) in enumerate(generator, 1):
