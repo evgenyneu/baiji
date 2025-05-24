@@ -23,7 +23,7 @@ def epub_to_chapters(path: str) -> List[str]:
                 tag.decompose()
 
             # Extract paragraphs and join with double newlines
-            paragraphs = [p.get_text(strip=True) for p in soup.find_all('p') if p.get_text(strip=True)]
+            paragraphs = [p.get_text() for p in soup.find_all('p') if p.get_text()]
             if paragraphs:
                 text = '\n\n'.join(paragraphs)
             else:
