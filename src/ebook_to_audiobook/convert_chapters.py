@@ -3,8 +3,8 @@ import os
 from kokoro import KPipeline
 import torch
 import soundfile as sf
-import time
 from .progress import save_progress, read_progress
+from .join_wav import join_wav
 
 def convert(chapters: List[str]) -> None:
     kokoro_pipe = KPipeline(lang_code='a')
@@ -22,6 +22,7 @@ def convert(chapters: List[str]) -> None:
             continue
 
         convert_single_chapter(chapter, chapter_idx, kokoro_pipe, resume_segment_idx)
+        join_wav(chapter_idx)
 
 def convert_single_chapter(text: str, chapter_idx: int, kokoro_pipe: KPipeline, start_segment_idx) -> None:
     """
