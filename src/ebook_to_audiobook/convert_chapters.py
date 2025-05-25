@@ -7,12 +7,12 @@ from .progress import save_progress, read_progress
 from .join_wav import join_wav
 from tqdm import tqdm
 
-def convert(chapters: List[str]) -> None:
+def convert(chapters: List[str], output_dir: str) -> None:
     kokoro_pipe = KPipeline(lang_code='a')
     total_chapters = len(chapters)
 
     # Read progress if exists
-    progress = read_progress()
+    progress = read_progress(output_dir)
     resume_chapter_idx, resume_segment_idx = progress
 
     if resume_chapter_idx is not None:
@@ -23,34 +23,36 @@ def convert(chapters: List[str]) -> None:
         if resume_chapter_idx is not None and chapter_idx < resume_chapter_idx:
             continue
 
-        convert_single_chapter(chapter, chapter_idx, total_chapters, kokoro_pipe, resume_segment_idx)
+        convert_single_chapter(chapter, chapter_idx, total_chapters, kokoro_pipe, resume_segment_idx, output_dir)
         resume_segment_idx = None # Start with the first segment of the next chapter
-        join_wav(chapter_idx)
+        join_wav(chapter_idx, output_dir)
 
-def convert_single_chapter(text: str, chapter_idx: int, total_chapters: int, kokoro_pipe: KPipeline, start_segment_idx) -> None:
+def convert_single_chapter(text: str, chapter_idx: int, total_chapters: int, kokoro_pipe: KPipeline, start_segment_idx, output_dir: str) -> None:
     """
     Convert a single chapter to audio chunks using Kokoro TTS and save each chunk as a .wav file.
     Splits the chapter into segments by single newlines and processes each segment independently.
     start_segment_idx: segment index to start from (1-based)
     """
-    os.makedirs('audio/chunks', exist_ok=True)
+    chunks_dir = os.path.join(output_dir, 'chunks')
+    os.makedirs(chunks_dir, exist_ok=True)
     segments = split_into_segments(text)
 
     for segment_idx, segment in enumerate(tqdm(segments, desc=f"Chapter {chapter_idx}/{total_chapters}"), 1):
         if start_segment_idx is not None and segment_idx <= start_segment_idx:
             continue
 
-        convert_segment(segment, chapter_idx, segment_idx, kokoro_pipe)
-        save_progress(chapter_idx, segment_idx)
+        convert_segment(segment, chapter_idx, segment_idx, kokoro_pipe, output_dir)
+        save_progress(chapter_idx, segment_idx, output_dir)
 
-def convert_segment(segment: str, chapter_idx: int, segment_idx: int, kokoro_pipe: KPipeline) -> None:
+def convert_segment(segment: str, chapter_idx: int, segment_idx: int, kokoro_pipe: KPipeline, output_dir: str) -> None:
     """
     Convert a text segment to audio using Kokoro TTS and save as a .wav file.
     """
+    chunks_dir = os.path.join(output_dir, 'chunks')
     generator = kokoro_pipe(segment, voice='af_heart')
 
     for chunk_idx, (graphemes, phonemes, audio_chunk) in enumerate(generator, 1):
-        chunk_path = f'audio/chunks/chunk_{chapter_idx:04d}_{segment_idx:04d}_{chunk_idx:04d}.wav'
+        chunk_path = os.path.join(chunks_dir, f'chunk_{chapter_idx:04d}_{segment_idx:04d}_{chunk_idx:04d}.wav')
         audio_array = audio_chunk.cpu().numpy() if torch.is_tensor(audio_chunk) else audio_chunk
         sf.write(chunk_path, audio_array, 24000)
 

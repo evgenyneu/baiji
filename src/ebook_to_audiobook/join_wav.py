@@ -2,12 +2,14 @@ import os
 from glob import glob
 from pydub import AudioSegment
 
-def join_wav(chapter_idx: int) -> None:
+def join_wav(chapter_idx: int, output_dir: str) -> None:
     """
-    Join all wav files for the given chapter in audio/chunks/, save as mp3 in audio/chapters/, and remove the wav files.
+    Join all wav files for the given chapter in output_dir/chunks/, save as mp3 in output_dir/chapters/, and remove the wav files.
     """
-    os.makedirs('audio/chapters', exist_ok=True)
-    pattern = 'audio/chunks/chunk_*.wav'
+    chapters_dir = os.path.join(output_dir, 'chapters')
+    chunks_dir = os.path.join(output_dir, 'chunks')
+    os.makedirs(chapters_dir, exist_ok=True)
+    pattern = os.path.join(chunks_dir, 'chunk_*.wav')
     chunk_files = sorted(glob(pattern))
 
     if not chunk_files:
@@ -20,7 +22,7 @@ def join_wav(chapter_idx: int) -> None:
         audio = AudioSegment.from_wav(chunk_file)
         combined += audio
 
-    mp3_path = f'audio/chapters/chapter_{chapter_idx:04d}.mp3'
+    mp3_path = os.path.join(chapters_dir, f'chapter_{chapter_idx:04d}.mp3')
     combined.export(mp3_path, format='mp3', bitrate='64k')
 
     # Remove wav files

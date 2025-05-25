@@ -1,23 +1,23 @@
 import json
 import os
 
-def save_progress(chapter_idx: int, segment_idx: int) -> None:
-    os.makedirs('audio', exist_ok=True)
+def save_progress(chapter_idx: int, segment_idx: int, output_dir: str) -> None:
+    os.makedirs(output_dir, exist_ok=True)
 
     progress = {
         "chapter_idx": chapter_idx,
         "segment_idx": segment_idx
     }
 
-    with open('audio/progress.json', 'w', encoding='utf-8') as f:
+    with open(os.path.join(output_dir, 'progress.json'), 'w', encoding='utf-8') as f:
         json.dump(progress, f, indent=2)
 
-def read_progress() -> tuple[int | None, int | None]:
+def read_progress(output_dir: str) -> tuple[int | None, int | None]:
     """
-    Read the current progress from audio/progress.json.
+    Read the current progress from output_dir/progress.json.
     Returns (chapter_idx, segment_idx) if the file exists, otherwise (None, None).
     """
-    path = 'audio/progress.json'
+    path = os.path.join(output_dir, 'progress.json')
     if not os.path.exists(path):
         return None, None
 
