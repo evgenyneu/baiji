@@ -1,3 +1,8 @@
+import warnings
+# Suppress pytorch warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
+
 from .args import parse_args
 from .read import read_input
 from .convert_chapters import convert
