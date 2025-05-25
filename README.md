@@ -6,17 +6,31 @@ This is a Python program that converts an ebook text to an audiobook:
 uv run main.py mybook.epub
 ```
 
-## Install
+## Usage
 
-* Clone this repository:
+* Clone this repository (requires [Git](https://git-scm.com/downloads)):
 
+```sh
+git clone https://github.com/evgenyneu/baiji.git
+cd baiji
+```
 
 * [Install UV](https://docs.astral.sh/uv/#installation) package manager.
+
 * Run:
 
 ```sh
-uv run main.py ~/Documents/books/animal_Liberation_now_peter_singer.epub
+uv run main.py path/to/your/book.epub
 ```
+
+The audio output is created in `audio` directory. Supports books in epub and txt formats.
+
+## How it works?
+
+* Uses [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) text to speech model to convert the text to audio files.
+* Creates audio mp3 files in `audio` directory.
+* Adds following mp3 tags: title, author, chapter name, track number and book cover image.
+* You can interrupt the process by pressing `Ctrl+C` at any time and resume later by running the same command again.
 
 ## What's Baiji?
 
