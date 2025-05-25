@@ -1,20 +1,14 @@
 [project]
-name = "txt-to-speech"
+name = "baiji"
 version = "0.1.0"
-description = "Text-to-speech experiments with Bark and VITS"
+description = "Python program that converts an ebook text to an audiobook"
 requires-python = ">=3.10,<3.13"
 dependencies = [
     "torch",
     "transformers",
     "soundfile",
-    "numpy",
-    "ipython",
-    "jupyter",
-    "notebook",
-    "ipykernel",
     "pydub",
     "kokoro>=0.9.4",
-    "pip>=25.1.1",
     "ebooklib>=0.19",
     "bs4>=0.0.2",
     "tqdm",
