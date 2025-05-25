@@ -57,7 +57,7 @@ See the list of voices and language codes [here](https://huggingface.co/hexgrad/
 
 ## What's Baiji?
 
-The baiji, a freshwater dolphin from China's Yangtze River, is functionally extinct due to pollution, overfishing, and habitat destruction.
+The baiji is a freshwater dolphin from China's Yangtze River. It went functionally extinct due to pollution, overfishing, and habitat destruction.
 
 <img src='./images/baiji.jpg' alt='The male BaiJi Lianlian and his daughter Zhen Zhen'>
 
