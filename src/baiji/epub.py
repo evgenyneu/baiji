@@ -2,15 +2,12 @@ from typing import List
 
 from ebooklib import epub, ITEM_DOCUMENT
 from bs4 import BeautifulSoup
+from .transform_text import normalize_text
 
 
 def epub_to_chapters(path: str) -> List[str]:
     """
     Extract chapters from an EPUB file.
-    Returns a list of strings, each string is a chapter's text.
-    Removes <header>, <footer>, <nav>, and <sup> tags from each chapter.
-    Paragraphs are separated by blank lines.
-    Skips chapters that are empty or only whitespace.
     """
     book = epub.read_epub(path)
     chapters = []
@@ -33,6 +30,7 @@ def epub_to_chapters(path: str) -> List[str]:
 
             # Skip chapters that are empty or only whitespace
             if text and text.strip():
+                text = normalize_text(text)
                 chapters.append(text)
 
     return chapters
