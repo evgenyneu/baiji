@@ -10,4 +10,5 @@ def main():
     out_dir = output_path(input_path)
     chapters = read_input(input_path)
     convert(chapters, out_dir)
-    print(f"Read {len(chapters)} chapters from {input_path}")
+    print(f"Audio files saved to {out_dir}")
+    print("We are done")
