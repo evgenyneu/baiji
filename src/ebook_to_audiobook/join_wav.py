@@ -1,6 +1,7 @@
 import os
 from glob import glob
 from pydub import AudioSegment
+import shutil
 
 def join_wav(chapter_idx: int, output_dir: str) -> None:
     """
@@ -24,8 +25,7 @@ def join_wav(chapter_idx: int, output_dir: str) -> None:
     mp3_path = os.path.join(output_dir, f'chapter_{chapter_idx:04d}.mp3')
     combined.export(mp3_path, format='mp3', bitrate='64k')
 
-    # Remove wav files
-    for chunk_file in chunk_files:
-        os.remove(chunk_file)
+    # Remove the entire chunks directory and its contents
+    shutil.rmtree(chunks_dir, ignore_errors=True)
 
     print(f"Chapter {chapter_idx} saved as {mp3_path}")
