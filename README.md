@@ -8,10 +8,7 @@ uv run main.py mybook.epub
 
 Example of the audio output:
 
-<audio controls>
-  <source src="./examples/alice_in_wonderland.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+<audio controls><source src="./examples/alice_in_wonderland.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
 
 ## Installation
 
