@@ -1,53 +1,38 @@
-# Text-to-Speech with Muyan-TTS
+# Baiji: an ebook to audiobook converter
 
-This project demonstrates text-to-speech conversion using the Muyan-TTS model.
+This is a Python program that converts an ebook text to an audiobook:
 
-## Setup
-
-This project uses [uv](https://docs.astral.sh/uv/) for Python package management.
-
-### Prerequisites
-
-Install uv if you haven't already:
-
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+```sh
+uv run main.py mybook.epub
 ```
 
-### Environment Setup
+## Install
 
-1. Create and activate a virtual environment with all dependencies:
+* Clone this repository:
 
-```bash
-uv sync
+
+* [Install UV](https://docs.astral.sh/uv/#installation) package manager.
+* Run:
+
+```sh
+uv run main.py ~/Documents/books/animal_Liberation_now_peter_singer.epub
 ```
 
-2. Activate the environment:
+## What's Baiji?
 
-```bash
-source .venv/bin/activate
-```
+The baiji, a freshwater dolphin from China's Yangtze River, is functionally extinct due to pollution, overfishing, and habitat destruction.
 
-3. Start Jupyter notebook:
+<img src='./images/baiji.jpg' alt='Picture of Falkland Island Fox'>
 
-```bash
-uv run jupyter notebook
-```
-
-### Quick Start
-
-1. Open `muyan_tts_test.ipynb` in Jupyter
-2. Run all cells to test the Muyan-TTS model
-3. Generated audio will be saved as `muyan_tts_output.wav`
+*The male BaiJi Lianlian and his daughter Zhen Zhen. Source:
+Zhou, Kaiya & Zhang, Xingduan. BaiJi: the Yangtze River dolphin and other endangered animals of China. Wash., D.C.: Stone Wall Press, 1991. ISBN 978-0-913276-56-3,  [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Lianlian_and_Zhenzhen,_two_Chinese_River_Dolphins.jpg).*
 
 
-### Usage
+## Feedback is welcome
 
-The notebook provides a complete example of:
+If you need help or notice a bug, feel free to create an issue ticket. We will be happy to help. :D
 
-- Loading the Muyan-TTS model
-- Converting text to speech
-- Saving audio output to file
-- Playing audio in the notebook
 
-Modify the `text` variable in the notebook to test with different input text.
+## The unlicense
+
+This work is in [public domain](UNLICENSE).
