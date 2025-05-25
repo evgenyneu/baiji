@@ -2,7 +2,7 @@ import os
 from glob import glob
 from pydub import AudioSegment
 import shutil
-from mutagen.id3 import ID3, TIT2, TPE1, TALB, TRCK
+from .mp3_tags import set_mp3_tags
 
 def join_wav(chapter_idx: int, output_dir: str, metadata: dict, total_chapters: int) -> None:
     """
@@ -26,16 +26,5 @@ def join_wav(chapter_idx: int, output_dir: str, metadata: dict, total_chapters: 
 
     mp3_path = os.path.join(output_dir, f'chapter_{chapter_idx:04d}.mp3')
     combined.export(mp3_path, format='mp3', bitrate='64k')
-
-    # Set ID3 metadata
-    tags = ID3()
-    tags.add(TIT2(encoding=3, text=f"Chapter {chapter_idx}"))
-    tags.add(TPE1(encoding=3, text=metadata.get('author', 'Unknown')))
-    tags.add(TALB(encoding=3, text=metadata.get('title', '')))
-    tags.add(TRCK(encoding=3, text=f"{chapter_idx}/{total_chapters}"))
-    tags.save(mp3_path)
-
-    # Remove the entire chunks directory and its contents
+    set_mp3_tags(mp3_path, chapter_idx, total_chapters, metadata)
     shutil.rmtree(chunks_dir, ignore_errors=True)
-
-    print(f"Chapter {chapter_idx} saved as {mp3_path}")
