@@ -2,22 +2,6 @@ from typing import List
 from .epub import epub_to_chapters
 import re
 
-
-def normalize_text(text: str) -> str:
-    """
-    Normalizes text by joining lines within paragraphs.
-    Treats two or more consecutive newlines as paragraph breaks.
-    Joins lines within a paragraph with a space.
-    """
-    paragraphs = re.split(r'\n{2,}', text)
-    normalized_paragraphs = []
-    for paragraph in paragraphs:
-        lines = [line.strip() for line in paragraph.splitlines()]
-        normalized_paragraph = ' '.join(line for line in lines if line)
-        normalized_paragraphs.append(normalized_paragraph)
-    return '\n\n'.join(normalized_paragraphs)
-
-
 def read_input(path: str) -> List[str]:
     """
     Reads the input file and returns a list of chapter strings.
@@ -32,3 +16,20 @@ def read_input(path: str) -> List[str]:
             return [normalized_text]
     else:
         raise ValueError("Unsupported file type. Only .epub and .txt are supported.")
+
+def normalize_text(text: str) -> str:
+    """
+    Normalizes text by joining lines within paragraphs.
+    Treats two or more consecutive newlines as paragraph breaks.
+    Joins lines within a paragraph with a space.
+
+    This is needed because many ebooks in txt format have lines break for each line of text
+    in a paragraph, which will create pauses in the text-to-speech output.
+    """
+    paragraphs = re.split(r'\n{2,}', text)
+    normalized_paragraphs = []
+    for paragraph in paragraphs:
+        lines = [line.strip() for line in paragraph.splitlines()]
+        normalized_paragraph = ' '.join(line for line in lines if line)
+        normalized_paragraphs.append(normalized_paragraph)
+    return '\n\n'.join(normalized_paragraphs)

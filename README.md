@@ -15,6 +15,8 @@ git clone https://github.com/evgenyneu/baiji.git
 cd baiji
 ```
 
+* [Install ffmpeg](https://ffmpeg.org/download.html).
+
 * [Install UV](https://docs.astral.sh/uv/#installation) package manager.
 
 * Run:
@@ -32,6 +34,7 @@ The path can point to an .epub or .txt file. The program will create mp3 files i
 * Creates audio mp3 files in `audio` directory.
 * Adds following mp3 tags: title, author, chapter name, track number and book cover image.
 * You can interrupt the process by pressing `Ctrl+C` at any time and resume later by running the same command again.
+* Automatically runs on NVIDIA CUDA if available.
 
 ## What's Baiji?
 

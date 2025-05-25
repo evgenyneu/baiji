@@ -9,8 +9,11 @@ from .convert_chapters import convert
 from .output_path import output_path
 from .cover_image import extract_cover_image
 from .epub_metadata import extract_metadata
+from .check_ffmpeg import verify_ffmpeg
 
 def main():
+    verify_ffmpeg()
+
     args = parse_args()
     input_path = args.input
 
