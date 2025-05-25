@@ -6,8 +6,9 @@ import soundfile as sf
 from .progress import save_progress, read_progress
 from .join_wav import join_wav
 from tqdm import tqdm
+from typing import Dict
 
-def convert(chapters: List[str], output_dir: str) -> None:
+def convert(chapters: List[str], output_dir: str, metadata: Dict[str, str]) -> None:
     kokoro_pipe = KPipeline(lang_code='a')
     total_chapters = len(chapters)
 
