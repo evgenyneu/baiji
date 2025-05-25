@@ -15,10 +15,11 @@ alwaysApply: true
 Here's the concise updated plan:
 
 1. **Directory Structure:**
-   - Root: `output/`
+   - Root: `audio/BOOK_TITLE/`
+     - BOOK_TITLE; comes from the files name (of .txt or .epub wihtout extension, lowercased, undescores replaces spaces).
      - `progress.json`: Tracks chapter and the text segment index (we split text by newlines to allow resuming where we left).
      - `chunks/`: Stores individual `.wav` chunks (e.g., `chunk_0001.wav`).
-     - `chapters/`: Stores combined `.mp3` files (e.g., `chapter_0001.mp3`).
+     - resulting mp3 files are places directly in audio/BOOK_TITLE/ (e.g., `chapter_0001.mp3`).
 
 2. **Process Flow:**
    - **Input Handling:**
@@ -31,12 +32,12 @@ Here's the concise updated plan:
 
    - **TTS Processing:**
      - Generate audio chunks using Kokoro TTS.
-     - Save each chunk as a `.wav` file in `output/chunks/`.
+     - Save each chunk as a `.wav` file in `audio/chunks/`.
      - Track progress in `progress.json`.
 
    - **Combining and Converting:**
      - Once all chunks for a chapter are generated, combine them into a single `.wav` file.
-     - Convert the combined `.wav` to `.mp3` and save in `output/chapters/`.
+     - Convert the combined `.wav` to `.mp3` and save in `audio/chapters/`.
      - Delete the processed `.wav` chunks.
 
    - **Cancellation and Resumption:**

@@ -33,7 +33,7 @@ def convert_single_chapter(text: str, chapter_idx: int, total_chapters: int, kok
     Splits the chapter into segments by single newlines and processes each segment independently.
     start_segment_idx: segment index to start from (1-based)
     """
-    os.makedirs('output/chunks', exist_ok=True)
+    os.makedirs('audio/chunks', exist_ok=True)
     segments = split_into_segments(text)
 
     for segment_idx, segment in enumerate(tqdm(segments, desc=f"Chapter {chapter_idx}/{total_chapters}"), 1):
@@ -50,7 +50,7 @@ def convert_segment(segment: str, chapter_idx: int, segment_idx: int, kokoro_pip
     generator = kokoro_pipe(segment, voice='af_heart')
 
     for chunk_idx, (graphemes, phonemes, audio_chunk) in enumerate(generator, 1):
-        chunk_path = f'output/chunks/chunk_{chapter_idx:04d}_{segment_idx:04d}_{chunk_idx:04d}.wav'
+        chunk_path = f'audio/chunks/chunk_{chapter_idx:04d}_{segment_idx:04d}_{chunk_idx:04d}.wav'
         audio_array = audio_chunk.cpu().numpy() if torch.is_tensor(audio_chunk) else audio_chunk
         sf.write(chunk_path, audio_array, 24000)
 
