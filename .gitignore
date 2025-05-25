@@ -2,6 +2,7 @@
 output/
 audio/
 book.txt
+animal_Liberation_now_peter_singer.epub
 
 # Audio files
 *.wav

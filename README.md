@@ -23,7 +23,8 @@ cd baiji
 uv run main.py path/to/your/book.epub
 ```
 
-The audio output is created in `audio` directory. Supports books in epub and txt formats.
+The path can point to an .epub or .txt file. The program will create mp3 files in the `audio` directory.
+
 
 ## How does it work?
 
