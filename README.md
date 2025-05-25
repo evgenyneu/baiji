@@ -47,6 +47,7 @@ See the list of voices and language codes [here](https://huggingface.co/hexgrad/
 
 * Uses [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) text to speech model to convert the text to audio files.
 * Creates audio mp3 files in `audio` directory.
+* Creates separate mp3 files for each chapter (.epub only).
 * Adds following mp3 tags: title, author, chapter name, track number and book cover image.
 * You can interrupt the process by pressing `Ctrl+C` at any time and resume later by running the same command again.
 * Automatically runs on NVIDIA CUDA if available.
