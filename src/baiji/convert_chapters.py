@@ -14,6 +14,7 @@ def convert(
     metadata: Dict[str, str],
     cover_path: str = None
 ) -> None:
+    print("== Initializing text-to-speech model...")
     kokoro_pipe = KPipeline(lang_code='a', repo_id='hexgrad/Kokoro-82M')
     total_chapters = len(chapters)
 

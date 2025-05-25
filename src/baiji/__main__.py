@@ -27,5 +27,5 @@ def main():
         cover_path=cover_path
     )
 
-    print(f"Audio files saved to {out_dir}")
-    print("We are done")
+    print(f"== Audio files saved to {out_dir}")
+    print("== We are done")
