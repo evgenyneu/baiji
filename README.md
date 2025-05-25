@@ -1,6 +1,6 @@
 # Baiji: an ebook to audiobook converter
 
-This is a Python program that converts an ebook text to an audiobook:
+This is a Python program that converts an ebook text to an audiobook (listen to [example](./examples/alice_in_wonderland.mp3)):
 
 ```sh
 uv run main.py mybook.epub
