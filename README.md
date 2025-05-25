@@ -25,7 +25,7 @@ uv run main.py path/to/your/book.epub
 
 The audio output is created in `audio` directory. Supports books in epub and txt formats.
 
-## How it works?
+## How does it work?
 
 * Uses [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M) text to speech model to convert the text to audio files.
 * Creates audio mp3 files in `audio` directory.
@@ -36,7 +36,7 @@ The audio output is created in `audio` directory. Supports books in epub and txt
 
 The baiji, a freshwater dolphin from China's Yangtze River, is functionally extinct due to pollution, overfishing, and habitat destruction.
 
-<img src='./images/baiji.jpg' alt='Picture of Falkland Island Fox'>
+<img src='./images/baiji.jpg' alt='The male BaiJi Lianlian and his daughter Zhen Zhen'>
 
 *The male BaiJi Lianlian and his daughter Zhen Zhen. Source:
 Zhou, Kaiya & Zhang, Xingduan. BaiJi: the Yangtze River dolphin and other endangered animals of China. Wash., D.C.: Stone Wall Press, 1991. ISBN 978-0-913276-56-3,  [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Lianlian_and_Zhenzhen,_two_Chinese_River_Dolphins.jpg).*
