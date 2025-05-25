@@ -8,25 +8,46 @@ from .transform_text import normalize_text
 def epub_to_chapters(path: str) -> List[str]:
     """
     Extract chapters from an EPUB file.
+    Returns a list of strings, each string is a chapter's text.
+    Removes <header>, <footer>, <nav>, and <sup> tags from each chapter.
+    Paragraphs are separated by blank lines.
+    Skips chapters that are empty or only whitespace.
     """
     book = epub.read_epub(path)
     chapters = []
 
     for item in book.get_items():
         if item.get_type() == ITEM_DOCUMENT:
-            soup = BeautifulSoup(item.get_content(), 'html.parser')
+            content = item.get_content()
+            print("\n=== First 500 characters of HTML content ===")
+            print(content[:1500])
+            print("===========================================\n")
+
+            soup = BeautifulSoup(content, 'html.parser')
 
             # Remove unwanted tags
             for tag in soup(['header', 'footer', 'nav', 'sup']):
                 tag.decompose()
 
-            # Extract paragraphs and join with double newlines
-            paragraphs = [p.get_text() for p in soup.find_all('p') if p.get_text()]
+            # Extract headers and paragraphs
+            text_parts = []
 
-            if paragraphs:
-                text = '\n\n'.join(paragraphs)
+            # Get headers first
+            for header in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
+                text_parts.append(header.get_text(strip=True))
+
+            # Then get paragraphs
+            paragraphs = [p.get_text(strip=True) for p in soup.find_all('p') if p.get_text(strip=True)]
+            text_parts.extend(paragraphs)
+
+            if text_parts:
+                text = '\n\n'.join(text_parts)
             else:
                 text = soup.get_text(separator='\n', strip=True)
+
+            print("\n=== First 500 characters of normalized text ===")
+            print(text[:1500])
+            print("===========================================\n")
 
             # Skip chapters that are empty or only whitespace
             if text and text.strip():
