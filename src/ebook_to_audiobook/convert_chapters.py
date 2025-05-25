@@ -14,7 +14,7 @@ def convert(
     metadata: Dict[str, str],
     cover_path: str = None
 ) -> None:
-    kokoro_pipe = KPipeline(lang_code='a')
+    kokoro_pipe = KPipeline(lang_code='a', repo_id='hexgrad/Kokoro-82M')
     total_chapters = len(chapters)
 
     # Read progress if exists
