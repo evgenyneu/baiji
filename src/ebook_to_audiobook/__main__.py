@@ -10,10 +10,17 @@ def main():
     input_path = args.input
 
     out_dir = output_path(input_path)
-    extract_cover_image(input_path, out_dir)
+    cover_path = extract_cover_image(input_path=input_path, output_dir=out_dir)
 
-    metadata = extract_metadata(input_path)
-    chapters = read_input(input_path)
-    convert(chapters, out_dir, metadata)
+    metadata = extract_metadata(input_path=input_path)
+    chapters = read_input(path=input_path)
+
+    convert(
+        chapters=chapters,
+        output_dir=out_dir,
+        metadata=metadata,
+        cover_path=cover_path
+    )
+
     print(f"Audio files saved to {out_dir}")
     print("We are done")

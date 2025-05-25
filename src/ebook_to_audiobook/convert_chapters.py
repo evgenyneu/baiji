@@ -8,7 +8,12 @@ from .join_wav import join_wav
 from tqdm import tqdm
 from typing import Dict
 
-def convert(chapters: List[str], output_dir: str, metadata: Dict[str, str]) -> None:
+def convert(
+    chapters: List[str],
+    output_dir: str,
+    metadata: Dict[str, str],
+    cover_path: str = None
+) -> None:
     kokoro_pipe = KPipeline(lang_code='a')
     total_chapters = len(chapters)
 
@@ -24,9 +29,23 @@ def convert(chapters: List[str], output_dir: str, metadata: Dict[str, str]) -> N
         if resume_chapter_idx is not None and chapter_idx < resume_chapter_idx:
             continue
 
-        convert_single_chapter(chapter, chapter_idx, total_chapters, kokoro_pipe, resume_segment_idx, output_dir)
+        convert_single_chapter(
+            text=chapter,
+            chapter_idx=chapter_idx,
+            total_chapters=total_chapters,
+            kokoro_pipe=kokoro_pipe,
+            start_segment_idx=resume_segment_idx,
+            output_dir=output_dir
+        )
         resume_segment_idx = None # Start with the first segment of the next chapter
-        join_wav(chapter_idx, output_dir, metadata, total_chapters)
+
+        join_wav(
+            chapter_idx=chapter_idx,
+            output_dir=output_dir,
+            metadata=metadata,
+            total_chapters=total_chapters,
+            cover_path=cover_path
+        )
 
 def convert_single_chapter(text: str, chapter_idx: int, total_chapters: int, kokoro_pipe: KPipeline, start_segment_idx, output_dir: str) -> None:
     """
