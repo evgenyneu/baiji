@@ -27,7 +27,9 @@ def main():
         chapters=chapters,
         output_dir=out_dir,
         metadata=metadata,
-        cover_path=cover_path
+        cover_path=cover_path,
+        lang_code=args.lang_code,
+        voice=args.voice
     )
 
     print(f"== Audio files saved to {out_dir}")

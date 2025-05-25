@@ -6,7 +6,7 @@ This is a Python program that converts an ebook text to an audiobook:
 uv run main.py mybook.epub
 ```
 
-## Usage
+## Installation
 
 * Clone this repository (requires [Git](https://git-scm.com/downloads)):
 
@@ -19,13 +19,28 @@ cd baiji
 
 * [Install UV](https://docs.astral.sh/uv/#installation) package manager.
 
-* Run:
+## Usage
 
 ```sh
 uv run main.py path/to/your/book.epub
 ```
 
 The path can point to an .epub or .txt file. The program will create mp3 files in the `audio` directory.
+
+
+### Choosing a language and voice
+
+You can choose a voice with `--voice` option and a language with `--lang-code` option.
+By default, the program uses American English language (language code `a`) and a female voice `af_heart`.
+
+For example, to use `if_sara` voice and Italian language, run:
+
+
+```sh
+uv run main.py --voice if_sara --lang-code i book.txt
+```
+
+See the list of voices and language codes [here](https://huggingface.co/hexgrad/Kokoro-82M/blob/main/VOICES.md).
 
 
 ## How does it work?
