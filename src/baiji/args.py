@@ -26,4 +26,10 @@ def parse_args():
         help="Voice to use for TTS (default: af_heart)"
     )
 
+    parser.add_argument(
+        "--save-txt",
+        action="store_true",
+        help="Save chapter text files debugging"
+    )
+
     return parser.parse_args()

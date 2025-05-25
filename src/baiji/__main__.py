@@ -10,6 +10,7 @@ from .output_path import output_path
 from .cover_image import extract_cover_image
 from .epub_metadata import extract_metadata
 from .check_ffmpeg import verify_ffmpeg
+from .save_txt import save_chapter_texts
 
 def main():
     verify_ffmpeg()
@@ -22,6 +23,9 @@ def main():
 
     metadata = extract_metadata(input_path=input_path)
     chapters = read_input(path=input_path)
+
+    if args.save_txt:
+        save_chapter_texts(chapters=chapters, output_dir=out_dir)
 
     convert(
         chapters=chapters,
