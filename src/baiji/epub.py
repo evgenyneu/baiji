@@ -19,10 +19,6 @@ def epub_to_chapters(path: str) -> List[str]:
     for item in book.get_items():
         if item.get_type() == ITEM_DOCUMENT:
             content = item.get_content()
-            print("\n=== First 500 characters of HTML content ===")
-            print(content[:1500])
-            print("===========================================\n")
-
             soup = BeautifulSoup(content, 'html.parser')
 
             # Remove unwanted tags
@@ -34,20 +30,17 @@ def epub_to_chapters(path: str) -> List[str]:
 
             # Get headers first
             for header in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
-                text_parts.append(header.get_text(strip=True))
+                text = header.get_text(separator='\n')
+                text_parts.append(text)
 
             # Then get paragraphs
-            paragraphs = [p.get_text(strip=True) for p in soup.find_all('p') if p.get_text(strip=True)]
+            paragraphs = [p.get_text() for p in soup.find_all('p') if p.get_text()]
             text_parts.extend(paragraphs)
 
             if text_parts:
                 text = '\n\n'.join(text_parts)
             else:
                 text = soup.get_text(separator='\n', strip=True)
-
-            print("\n=== First 500 characters of normalized text ===")
-            print(text[:1500])
-            print("===========================================\n")
 
             # Skip chapters that are empty or only whitespace
             if text and text.strip():
