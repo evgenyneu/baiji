@@ -18,6 +18,7 @@ dependencies = [
     "ebooklib>=0.19",
     "bs4>=0.0.2",
     "tqdm",
+    "mutagen>=1.47.0",
 ]
 
 [build-system]

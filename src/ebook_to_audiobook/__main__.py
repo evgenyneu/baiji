@@ -13,7 +13,6 @@ def main():
     extract_cover_image(input_path, out_dir)
 
     metadata = extract_metadata(input_path)
-    print(metadata)
     chapters = read_input(input_path)
     convert(chapters, out_dir, metadata)
     print(f"Audio files saved to {out_dir}")

@@ -26,7 +26,7 @@ def convert(chapters: List[str], output_dir: str, metadata: Dict[str, str]) -> N
 
         convert_single_chapter(chapter, chapter_idx, total_chapters, kokoro_pipe, resume_segment_idx, output_dir)
         resume_segment_idx = None # Start with the first segment of the next chapter
-        join_wav(chapter_idx, output_dir)
+        join_wav(chapter_idx, output_dir, metadata)
 
 def convert_single_chapter(text: str, chapter_idx: int, total_chapters: int, kokoro_pipe: KPipeline, start_segment_idx, output_dir: str) -> None:
     """
